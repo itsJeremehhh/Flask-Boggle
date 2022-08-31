@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boogle</title>
+    <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+    <!-- lets create an area for the gameboard so our code can populate it -->
+    <section id="boggle">
+        <!-- now lets create the board itself via table -->
+        <table class="board">
+            <tbody>
+                <!-- now lets use Jinja to make our information display -->
+                {% for row in board %} 
+                <!-- looping over our data -->
+                <tr>
+                    {% for cell in row %} 
+                    <td> {{ cell }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+<!-- that should clear up the board, now we need a few more things like a scoreboard and a timer -->
+        <p>High Score:
+            <b>{{ highscore }}</b>
+            in {{ nplays }} plays
+        </p>
+
+        <!-- now the timer -->
+        <p>
+            Score: <b class="score">0</b>
+            Seconds Left: <b class="timer"></b>
+        </p>
+<!-- and now an area to allow the user to type a word -->
+        <form method="POST" class="add-word">
+            <input name="word" class="word" autofocus> <!--whats this autofocus in the input-->
+            <button>Enter</button>
+        </form>
+<!-- we want an area to displauy messages to inform the player of their actions -->
+        <p class="msg">
+            <!-- our JS will putt messages here dynamically -->
+        </p>
+        <ul class="words">
+            <!-- our JS will place words here as they score -->
+        </ul>
+
+    </section>
+    <script src="http://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/axios@0.19.0/dist/axios.js"></script>
+    <script src="/static/app.js"></script>   
+</body>
+</html>
